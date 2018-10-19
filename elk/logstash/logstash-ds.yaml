@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: logstash-agent
+  labels:
+    app: logstash-agent
+spec:
+  selector:
+    matchLabels:
+      app: logstash-agent
+  template:
+    metadata:
+      labels:
+        app: logstash-agent
+    spec:
+      containers:
+      - name: logstash 
+        image: tf-1:5000/logstash:5.6.12
+        command: ["logstash", "-f", "/usr/share/logstash/pipeline.conf", "--config.reload.automatic"]
+        ports:
+          - containerPort: 5044
+        volumeMounts:
+        - name: logstash-config
+          mountPath: /usr/share/logstash/pipeline.conf
+          subPath: pipeline.conf
+      volumes:
+      - name: logstash-config 
+        configMap:
+          name: logstash-cm
+          items:
+          - key: pipeline.conf
+            path: pipeline.conf

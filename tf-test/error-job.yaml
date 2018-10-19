@@ -1,0 +1,18 @@
+kind: Job
+apiVersion: batch/v1
+metadata:
+  name: test-error
+spec:  
+  template:
+    metadata:
+      name: test-error
+      labels:
+        tf: test-error
+    spec:
+      containers:
+      - name: test-error
+        image: tf-1:5000/tf-dis:1.0
+        ports:
+        - containerPort: 2222
+        command: ["sle", "3600"]
+      restartPolicy: Never
