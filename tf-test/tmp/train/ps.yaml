@@ -11,9 +11,19 @@ spec:
     spec:
       containers:
       - name: t2-tf-dis-ps-1-0
-        image: tf-1:5000/test-tf14:1.0
+        image: tf-1:5000/tf-hdfs-gfs:1.0
         ports:
         - containerPort: 2222
         command: ["sleep", "3600"]
+        securityContext:
+            privileged: true
+        volumeMounts:
+        - mountPath: /mnt
+          name: glusterfsvol
+      volumes:
+      - name: glusterfsvol
+        glusterfs:
+          endpoints: glusterfs-cluster
+          path: gv1
       restartPolicy: Never
 

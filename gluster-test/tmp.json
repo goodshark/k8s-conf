@@ -1,0 +1,20 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "foo-fs"
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "foo-fs",
+                "image": "tf-1:5000/tf-hdfs-gfs:1.0",
+                "command": ["sleep", "3600"],
+                "securityContext": {
+                    "privileged": true
+                }
+            }
+        ]
+    }
+}
+
