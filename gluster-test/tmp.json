@@ -9,7 +9,7 @@
             {
                 "name": "foo-fs",
                 "image": "tf-1:5000/tf-hdfs-gfs:1.0",
-                "command": ["sleep", "3600"],
+                "command": ["sleep", "60"],
                 "securityContext": {
                     "privileged": true
                 }

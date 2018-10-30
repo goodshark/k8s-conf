@@ -14,7 +14,8 @@ spec:
         image: tf-1:5000/tf-hdfs-gfs:1.0
         ports:
         - containerPort: 2222
-        command: ["sleep", "3600"]
+        command: ["bash", "-c"]
+        args: ["echo 'foobar' && ls -l && sleep 20 && echo 'haha'"]
         securityContext:
             privileged: true
         volumeMounts:
@@ -26,4 +27,5 @@ spec:
           endpoints: glusterfs-cluster
           path: gv1
       restartPolicy: Never
+  backoffLimit: 0
 

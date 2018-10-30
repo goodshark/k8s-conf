@@ -26,7 +26,7 @@
                 "name": "glusterfsvol",
                 "glusterfs": {
                     "endpoints": "glusterfs-cluster",
-                    "path": "gv1"
+                    "path": "gv1/good"
                 }
             }
         ]
