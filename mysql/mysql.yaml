@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: tf-1:5000/mysql:1.0
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "123456"
+        ports:
+        - containerPort: 3306
