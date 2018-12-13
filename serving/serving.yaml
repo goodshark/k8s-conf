@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: tf-serving
+  labels:
+    app: tf-serving
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tf-serving
+  template:
+    metadata:
+      labels:
+        app: tf-serving
+    spec:
+      containers:
+      - name: tf-serving-test
+        image: tf-1:5000/serving:1.0
+        env:
+        - name: MODEL_NAME
+          value: test
+        ports:
+        - name: rpc
+          containerPort: 8500
+        - name: http
+          containerPort: 8501
+        volumeMounts:
+        - mountPath: /models/test
+          name: glusterfsvol
+      volumes:
+      - name: glusterfsvol
+        glusterfs: 
+          endpoints: glusterfs-cluster
+          path: gv1/good
+

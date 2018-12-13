@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tf-serving
+spec:
+  type: NodePort
+  ports:
+  - name: rpc
+    port: 8500
+    targetPort: rpc
+    nodePort: 31000
+  - name: http
+    port: 8501
+    targetPort: http
+    nodePort: 31001
+  selector:
+    app: tf-serving
+
